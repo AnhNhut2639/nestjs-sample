@@ -18,22 +18,22 @@ export class PostsService {
     return await this.model.find().exec();
   }
 
-  //   async findOne(id: string): Promise<Todo> {
-  //     return await this.model.findById(id).exec();
-  //   }
+  async findOne(id: string): Promise<Post> {
+    return await this.model.findById(id).exec();
+  }
 
-  //   async create(createTodoDto: CreateTodoDto): Promise<Todo> {
-  //     return await new this.model({
-  //       ...createTodoDto,
-  //       createdAt: new Date(),
-  //     }).save();
-  //   }
+  async create(createPostDto: CreatePostDto): Promise<Post> {
+    return await new this.model({
+      ...createPostDto,
+      createdAt: new Date(),
+    }).save();
+  }
 
-  //   async update(id: string, updateTodoDto: UpdateTodoDto): Promise<Todo> {
-  //     return await this.model.findByIdAndUpdate(id, updateTodoDto).exec();
-  //   }
+  async update(id: string, updatePostDto: UpdatePostDto): Promise<Post> {
+    return await this.model.findByIdAndUpdate(id, updatePostDto).exec();
+  }
 
-  //   async delete(id: string): Promise<Todo> {
-  //     return await this.model.findByIdAndDelete(id).exec();
-  //   }
+  async delete(id: string): Promise<Post> {
+    return await this.model.findByIdAndDelete(id).exec();
+  }
 }
