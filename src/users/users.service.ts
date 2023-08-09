@@ -55,9 +55,9 @@ export class UsersService {
   //   return `This action updates a #${id} user`;
   // }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+  async remove(id: string) {
+    return await this.model.deleteOne({ _id: id });
+  }
 }
 
 // nest g resource user
