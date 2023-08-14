@@ -17,6 +17,7 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { BeltGuard } from 'src/belt/belt.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('product')
 // @UseGuards(BeltGuard)
@@ -24,7 +25,7 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  // @UseGuards(BeltGuard)
+  // @UseGuards(AuthGuard)
   getProducts() {
     return this.productService.getProducts();
   }

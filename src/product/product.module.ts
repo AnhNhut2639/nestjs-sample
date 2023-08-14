@@ -16,6 +16,14 @@ import { RequestService } from 'src/request.service';
   imports: [StoreModule],
   controllers: [ProductController],
   providers: [ProductService, RequestService],
+  // providers: [
+  //   ProductService,
+  //   RequestService,
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: AuthGuard,
+  //   },
+  // ],
   // Mock data su dung khi test hoac dynamic class (Development or Production)
   // providers: [
   //   {
