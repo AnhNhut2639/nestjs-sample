@@ -1,8 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, Logger } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 // import { IStore } from './store/store.config';
 import { StoreService } from './store/store.service';
+import { RequestService } from 'src/request.service';
+import { AuthencationMiddleware } from 'src/middlewares/authencation.middleware';
 
 @Injectable()
 export class ProductService {
@@ -14,8 +16,15 @@ export class ProductService {
   //   console.log(storeConfig);
   // }
 
+  private readonly logger = new Logger(AuthencationMiddleware.name);
+
   // dung voi import module
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    // middlewares
+    private readonly requestService: RequestService,
+  ) {}
+  // middlewares
 
   private products = [
     { id: 0, name: 'TV', from: 'VN' },
@@ -26,6 +35,9 @@ export class ProductService {
     this.storeService.save({
       message: 'this is useFactory',
     });
+    // middlewares
+    // const userId = this.requestService.getUserId();
+    // this.logger.log('middleware UserId:', userId);
     return this.products;
   }
   getProduct(id: number) {

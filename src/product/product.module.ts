@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 // import { IStore } from './store/store.config';
 // import { StoreService } from './store/store.service';
 import { StoreModule } from './store/store.module';
+import { AuthencationMiddleware } from 'src/middlewares/authencation.middleware';
+import { RequestService } from 'src/request.service';
 // import { ProductMockService } from './product-mock.service';
 // function createStore(config: IStore): StoreService {
 //   console.log('useFactory Params', config);
@@ -13,7 +15,7 @@ import { StoreModule } from './store/store.module';
 @Module({
   imports: [StoreModule],
   controllers: [ProductController],
-  providers: [ProductService],
+  providers: [ProductService, RequestService],
   // Mock data su dung khi test hoac dynamic class (Development or Production)
   // providers: [
   //   {
@@ -44,4 +46,10 @@ import { StoreModule } from './store/store.module';
   //   },
   // ],
 })
-export class ProductModule {}
+export class ProductModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthencationMiddleware).forRoutes('*');
+  }
+}
+
+// .forRoutes({ path: '/path', method: RequestMethod.GET });
