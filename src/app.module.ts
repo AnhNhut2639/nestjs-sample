@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PostModule } from './posts/posts.module';
 // config dotenv
 import { ConfigModule } from '@nestjs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.MONGO_ACCOUNT}:${process.env.MONGO_PASSWORD}@cluster0.dduiw26.mongodb.net/nextprisma`,
     ),
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
